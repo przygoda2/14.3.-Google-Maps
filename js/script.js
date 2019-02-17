@@ -1,27 +1,58 @@
 'use strict';
 (function(){ 
+	// Zapiszemy sobei w zmiennej odwołanie do elementu z id="infos", w którym będziemy wyświetlać komunikaty po kliknięciu markera. 
 	
-	// Definujemy funkcję initMap w zakresie globalnym (czyli jako właściwość obiektu window).
+	var infos = document.getElementById('infos');
+	
+	// Definiujemy funkcję initMap tak samo jak wcześniej. 
+	
   	window.initMap = function() {
-		
-		// Zapisujemy w zmiennej obiekt zawierający współrzędne geograficzne.
+		// Zdefiniujemy parę dodatkowych współrzędnych dla dodatkowych markerów. 
 		var uluru = {lat: -25.363, lng: 131.044};
+		var coords2 = {lat: -25.363, lng: 134.044};
+		var coords3 = {lat: -25.363, lng: 137.044};
 		
-		// W zmiennej map zapisujemy nową instancję obiektu Map. 
 		var map = new google.maps.Map(document.getElementById('map'), {
-			// Podajemy opcje mapy, np. zoom i punkt wycentrowania mapy.
 			zoom: 4,
 			center: uluru
 		});
 		
-		// Definiujemy marker jako nową instancję obiektu Marker.
-		var marker = new google.maps.Marker({
-			// I podajemy opcje tego markera, np. na której mapie ma być dodany oraz jakie są jego współrzędne. 
+		var markerOne = new google.maps.Marker({
 			position: uluru,
 			map: map
-		}); 
-	}	
-	 
+		});
+		
+		// Po dodaniu markera możemy użyć jego metody addListener:
+		
+		markerOne.addListener('click', function(){
+			// Wewnątrz funcji wpisujemy kod, który ma się wykonać po kliknięciu markera. W tym przykładzie wyświetlimy tekst na stronie. 
+			infos.innerHTML = 'You clicked markerOne';
+		});		
+		
+		// Dodajemy jeszcze dwa markery, aby sprawdzić czy na pewno kliknięcie każdego z nich wyświetli inny tekst. 
+		
+		var markerTwo = new google.maps.Marker({
+			position: coords2,
+			map: map
+		});
+
+		markerTwo.addListener('click', function(){
+			infos.innerHTML = 'You clicked markerTwo';
+		});		
+		
+		var markerThree = new google.maps.Marker({
+			position: coords3,
+			map: map
+		});
+		
+		markerThree.addListener('click', function(){
+			infos.innerHTML = 'You clicked markerThree';
+		});	
+		
+		// Oczywiście, w takim przypadku dużo lepiej by było zastosować pętlę do zdefiniowania wielu markerów, niż powtarzać prawie identyczny kod. To jednak będzie już za chwilę częścią Twojego zadania!
+		
+	}; 
+	
 })();  
 
 /*
