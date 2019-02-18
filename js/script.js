@@ -1,12 +1,12 @@
 window.initMap = function () {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: slides[0].coords
+    zoom: 10,
+    center: data[0].coords
   });
   var marker = [];
-  for (i = 0; i < slides.length; i++) {
+  for (i = 0; i < data.length; i++) {
     var marker = new google.maps.Marker({
-      position: slides[i].coords,
+      position: data[i].coords,
       map: map
     });
   }
